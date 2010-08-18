@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+    <head>
+	<title>PwrDrain</title>
+	<link rel="stylesheet" type="text/css" href="css/PwrDrain.css" />
+	<script language="javascript" type="text/javascript" src="js/compat.js"></script>
+	<script language="javascript" type="text/javascript" src="js/errors.js"></script>
+	<script language="javascript" type="text/javascript" src="js/PwrDrain.js"></script>
+	<script language="javascript" type="text/javascript" src="js/StyleManager.js"></script>
+	<script language="javascript" type="text/javascript" src="js/UiManager.js"></script>
+	<script language="javascript" type="text/javascript" src="styles/edgcunbe/style.js"></script>
+	<script language="javascript" type="text/javascript" src="styles/lucy/style.js"></script>
+	<script language="javascript" type="text/javascript" src="styles/simpson/style.js"></script>
+	<script language="javascript" type="text/javascript" src="styles/square/style.js"></script>
+	<script language="javascript" type="text/javascript">
+	    try {
+		window.onload = function () {
+			window.removeEventListener('load', arguments.callee);
+			// Publish PwrDrain instance for Debug.js
+			window.pwrDrain = PwrDrain(idBody, idBackground);
+			return pwrDrain.main.call(this);
+		    };
+	    } catch (e) {
+		var wshShell = new ActiveXObject('WScript.Shell');
+		wshShell.Popup(e, 0, e.message);
+		System.Gadget.close();
+		throw e;
+	    }
+	</script>
+    </head>
+    <body id="idBody"><g:background id="idBackground"></g:background></body>
+</html>

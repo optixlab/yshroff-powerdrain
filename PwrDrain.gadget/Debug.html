@@ -1,0 +1,33 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml" >
+    <head>
+	<title>The Debug Flyout</title>
+	<link rel="stylesheet" type="text/css" href="css/Debug.css" />
+	<script language="javascript" type="text/javascript" src="js/compat.js"></script>
+	<script language="javascript" type="text/javascript" src="js/Debug.js"></script>
+	<script language="javascript" type="text/javascript">
+	    try {
+		window.onload = function () {
+		    window.removeEventListener('load', arguments.callee);
+		    var mainWindow = System.Gadget.document.parentWindow;
+		    return Debug(mainWindow, document.getElementById('idSettings')).main();
+		};
+	    } catch (e) {
+		var wshShell = new ActiveXObject('WScript.Shell');
+		wshShell.Popup(e, 0, e.message);
+		System.Gadget.close();
+		throw e;
+	    }
+	</script>
+    </head>
+    <body>
+	<g:background id="idBackground">
+	    <p>
+	    <input type="button" id="btnMin" value="Min" />
+	    <input type="button" id="btnMed" value="Medium" />
+	    <input type="button" id="btnMax" value="Max" />
+	    <input type="button" id="btnNext" value="Next Style" />
+	    </p>
+	    <div id="idSettings"></div>
+	</g:background>
+    </body>
+</html>

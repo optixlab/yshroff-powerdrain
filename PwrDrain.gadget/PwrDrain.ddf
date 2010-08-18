@@ -1,0 +1,22 @@
+.Set CabinetName1=PwrDrain.gadget
+.Set DiskDirectory1=
+
+COPYING COPYING
+gadget.xml gadget.xml
+PwrDrain.html PwrDrain.html
+css\Debug.css css\Debug.css
+css\PwrDrain.css css\PwrDrain.css
+de\gadget.xml de\gadget.xml
+de\js\errors.js de\js\errors.js
+images\icon.png images\icon.png
+js\compat.js js\compat.js
+js\errors.js js\errors.js
+js\PwrDrain.js js\PwrDrain.js
+js\StyleManager.js js\StyleManager.js
+js\UiManager.js js\UiManager.js
+styles\simpson\docked.png styles\simpson\docked.png
+styles\simpson\dockedhand.png styles\simpson\dockedhand.png
+styles\simpson\style.js styles\simpson\style.js
+styles\square\docked.png styles\square\docked.png
+styles\square\dockedhand.png styles\square\dockedhand.png
+styles\square\style.js styles\square\style.js

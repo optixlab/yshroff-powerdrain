@@ -1,0 +1,14 @@
+﻿body
+{
+	margin: 0;
+	width: 800px;
+	height: 400px;
+}
+
+#idBackground
+{
+	background-color: White;
+	padding: 20px;
+	width: 800px;
+	height: 400px;
+}

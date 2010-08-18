@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<gadget>
+  <name>PwrDrain</name>
+  <version>0.1</version>
+  <icons>
+    <icon src="images/icon.png" />
+  </icons>
+  <author name="Jocki84">
+    <info url="http://code.google.com/jocki84/PwrDrain/" text="Hosted by Google Code" />
+  </author>
+  <copyright>© 2010</copyright>
+  <description>Keep an eye on the current drain of various power sources in the system.</description>
+  <hosts>
+    <host name="sidebar">
+      <autoscaleDPI>true</autoscaleDPI>
+      <base type="html" apiVersion="1.0.0" src="PwrDrain.html" />
+      <permissions>full</permissions>
+      <platform minPlatformVersion="1.0" />
+    </host>
+  </hosts>
+</gadget>

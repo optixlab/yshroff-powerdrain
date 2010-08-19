@@ -40,51 +40,58 @@ var PwrDrain = function(body, bgnd) {
 	};
 
 	var main = function() {
-	    // Activate the stored style.
-	    setStyle(getCurrentStyle(), body, bgnd);
+	    try {
+		// Activate the stored style.
+		setStyle(getCurrentStyle(), body, bgnd);
 
-	    // Connect to the 'power' namespace of the CIMv2 (Common Information Model) implementation.
-	    var wmiPower = new ActiveXObject('WbemScripting.SWbemLocator').
-			    ConnectServer('.', 'root\\cimv2\\power');
+		// Connect to the 'power' namespace of the CIMv2 (Common Information Model) implementation.
+		var wmiPower = new ActiveXObject('WbemScripting.SWbemLocator').
+				ConnectServer('.', 'root\\cimv2\\power');
 
-	    // Try to fetch the power meter we were using last time.
-	    var meterName = System.Gadget.Settings.readString('meterName');
+		// Try to fetch the power meter we were using last time.
+		var meterName = System.Gadget.Settings.readString('meterName');
 
-	    // If we couldn't get the previous meter, use a random one.
-	    if (typeof powerMeter !== 'object' || powerMeter.Path_.Class !== wmiPowerMeterClass) {
-		var powerMeters = wmiPower.InstancesOf(wmiPowerMeterClass);
-		if (powerMeters.Count !== 0)
-		    powerMeter = powerMeters.ItemIndex(0);
-		for (var i = powerMeters.Count - 1; i != -1; --i) {
-		    var meter = powerMeters.ItemIndex(i);
-		    if (meter.DeviceID === meterName) {
-			powerMeter = meter;
-			break;
+		// If we couldn't get the previous meter, use a random one.
+		if (typeof powerMeter !== 'object' || powerMeter.Path_.Class !== wmiPowerMeterClass) {
+		    var powerMeters = wmiPower.InstancesOf(wmiPowerMeterClass);
+		    if (powerMeters.Count !== 0)
+			powerMeter = powerMeters.ItemIndex(0);
+		    for (var i = powerMeters.Count - 1; i != -1; --i) {
+			var meter = powerMeters.ItemIndex(i);
+			if (meter.DeviceID === meterName) {
+			    powerMeter = meter;
+			    break;
+			}
 		    }
 		}
-	    }
-	    if (typeof powerMeter !== 'object' || powerMeter.Path_.Class !== wmiPowerMeterClass)
-		throw new Error(ErrMsg.noMeters());
-	    System.Gadget.Settings.writeString('meterName', powerMeter.DeviceID);
+		if (typeof powerMeter !== 'object' || powerMeter.Path_.Class !== wmiPowerMeterClass)
+		    throw new Error(ErrMsg.noMeters());
+		System.Gadget.Settings.writeString('meterName', powerMeter.DeviceID);
 
-	    // Now we have a power meter, update the display unless we're debugging.
-	    if (true) {
-		// Set up event handler that restarts our update loop when we become visible.
-		System.Gadget.visibilityChanged = function () {
-		    if (System.Gadget.visible)
-			updateUi();
-		};
+		// Now we have a power meter, update the display unless we're debugging.
+		if (true) {
+		    // Set up event handler that restarts our update loop when we become visible.
+		    System.Gadget.visibilityChanged = function () {
+			if (System.Gadget.visible)
+			    updateUi();
+		    };
 
-		// Flip styles on dblclick
-		body.ondblclick = function () {
-		    setStyle(StyleManager.nextStyle(getCurrentStyle()));
-		};
-	    } else {
-		// Toggle the debug flyout:
-		body.ondblclick = function () {
-		    System.Gadget.Flyout.file = 'Debug.html';
-		    System.Gadget.Flyout.show = !System.Gadget.Flyout.show;
-		};
+		    // Flip styles on dblclick
+		    body.ondblclick = function () {
+			setStyle(StyleManager.nextStyle(getCurrentStyle()));
+		    };
+		} else {
+		    // Toggle the debug flyout:
+		    body.ondblclick = function () {
+			System.Gadget.Flyout.file = 'Debug.html';
+			System.Gadget.Flyout.show = !System.Gadget.Flyout.show;
+		    };
+		}
+	    } catch (e) {
+		var wshShell = new ActiveXObject('WScript.Shell');
+		wshShell.Popup(e, 0, e.message);
+		System.Gadget.close();
+		throw e;
 	    }
 	};
 

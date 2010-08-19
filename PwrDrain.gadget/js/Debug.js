@@ -77,7 +77,14 @@ var Debug = function (mainWindow, settings) {
 	};
 
 	var main = function () {
-	    createUi();
+	    try {
+		createUi();
+	    } catch (e) {
+		var wshShell = new ActiveXObject('WScript.Shell');
+		wshShell.Popup(e, 0, e.message);
+		System.Gadget.close();
+		throw e;
+	    }
 	};
 
 	self.main = main;

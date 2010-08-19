@@ -14,11 +14,11 @@
 	<script language="javascript" type="text/javascript">
 	    try {
 		window.onload = function () {
-			window.removeEventListener('load', arguments.callee);
-			// Publish PwrDrain instance for Debug.js
-			window.pwrDrain = PwrDrain(idBody, idBackground);
-			return pwrDrain.main.call(this);
-		    };
+		    window.onload = null;
+		    // Publish PwrDrain instance for Debug.js
+		    window.pwrDrain = PwrDrain(idBody, idBackground);
+		    return pwrDrain.main.call(this);
+		};
 	    } catch (e) {
 		var wshShell = new ActiveXObject('WScript.Shell');
 		wshShell.Popup(e, 0, e.message);

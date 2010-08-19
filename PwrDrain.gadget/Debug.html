@@ -7,7 +7,7 @@
 	<script language="javascript" type="text/javascript">
 	    try {
 		window.onload = function () {
-		    window.removeEventListener('load', arguments.callee);
+		    window.onload = null;
 		    var mainWindow = System.Gadget.document.parentWindow;
 		    return Debug(mainWindow, document.getElementById('idSettings')).main();
 		};

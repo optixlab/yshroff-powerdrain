@@ -1,0 +1,6 @@
+syntax: glob
+
+# Build results
+PwrDrain.gadget/PwrDrain*.gadget
+setup.inf
+setup.rpt
